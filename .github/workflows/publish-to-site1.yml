@@ -31,18 +31,22 @@ jobs:
 
       - name: Clone ${{ matrix.site.name }} repo
         run: |
-          git clone git@github.com:tommyiaqai/${{ matrix.site.name }}.git ${{ matrix.site.name }}
+          git clone git@github.com:tommyiaqai/${{ matrix.site.name }}.git site-target
 
-      - name: Copy files to ${{ matrix.site.name }}
+      - name: Copy files to ${{ matrix.site.name }} (excluding git folders)
         run: |
-          rsync -av --delete ./ ${{ matrix.site.name }}/ \
+          rsync -av --delete ./ site-target/ \
             --exclude='.git/' \
             --exclude='.github/' \
+            --exclude='site-target/' \
+            --exclude='site1/' \
+            --exclude='site2/' \
+            --exclude='site3/' \
             --exclude='README.md'
 
       - name: Commit and push to ${{ matrix.site.name }}
         run: |
-          cd ${{ matrix.site.name }}
+          cd site-target
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
