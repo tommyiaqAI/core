@@ -1,13 +1,22 @@
-name: Deploy to site1
+name: Deploy to sites
 
 on:
   push:
     branches:
-      - main  # or your main branch name
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        site:
+          - name: site1
+            secret: DEPLOY_KEY
+          - name: site2
+            secret: DEPLOY_KEY_2
+          - name: site3
+            secret: DEPLOY_KEY_3
 
     steps:
       - name: Checkout core repo
@@ -16,24 +25,24 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets[matrix.site.secret] }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: Clone site1 repo
+      - name: Clone ${{ matrix.site.name }} repo
         run: |
-          git clone git@github.com:tommyiaqai/site1.git site1
+          git clone git@github.com:tommyiaqai/${{ matrix.site.name }}.git ${{ matrix.site.name }}
 
-      - name: Copy files to site1
+      - name: Copy files to ${{ matrix.site.name }}
         run: |
-          rsync -av --delete ./ site1/ \
+          rsync -av --delete ./ ${{ matrix.site.name }}/ \
             --exclude='.git/' \
             --exclude='.github/' \
             --exclude='README.md'
 
-      - name: Commit and push to site1
+      - name: Commit and push to ${{ matrix.site.name }}
         run: |
-          cd site1
+          cd ${{ matrix.site.name }}
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
