@@ -35,7 +35,7 @@ jobs:
 
       - name: Copy index and shared assets to ${{ matrix.site.name }}
         run: |
-          rsync -av index.html style.css site-target/ \
+          rsync -av index.html style.css checkout.html site-target/ \
             --exclude=site-config.js \
             --exclude='.git/' \
             --exclude='.github/'
