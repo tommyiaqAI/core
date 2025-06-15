@@ -33,17 +33,10 @@ jobs:
         run: |
           git clone git@github.com:tommyiaqai/${{ matrix.site.name }}.git site-target
 
-      - name: Copy files to ${{ matrix.site.name }} (excluding git folders)
+      - name: Copy shared files to ${{ matrix.site.name }}
         run: |
-          rsync -av --delete ./ site-target/ \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='site-target/' \
-            --exclude='site1/' \
-            --exclude='site2/' \
-            --exclude='site3/' \
-            --exclude='README.md'
-
+          rsync -av index.html css/ js/ site-target/
+          
       - name: Commit and push to ${{ matrix.site.name }}
         run: |
           cd site-target
