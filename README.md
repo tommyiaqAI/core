@@ -1,1 +1,1 @@
-La mia prima vetrina DELLA MADONNA
+La mia prima vetrina
