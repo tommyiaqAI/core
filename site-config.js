@@ -3,7 +3,8 @@ export default {
   storeName: "My Awesome Store",
   contact: {
     email: "info@myawesomestore.com",
-    phone: "+123456789"
+    phone: "+123456789",
+    iban: "IT60X0542811101000000123456",
   },
   firebaseConfig: {
     apiKey: "AIzaSyAdFeVtKdb5oczNANmYPOeTkf2WbP_ruqg",
