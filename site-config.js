@@ -1,9 +1,9 @@
 export default {
-  siteId: "site3",
-  storeName: "My Awesome Store",
+  siteId: "site1",
+  storeName: "Azienda Agricola La Salinella",
   contact: {
-    email: "info@myawesomestore.com",
-    phone: "+123456789",
+    email: "salinella1991@libero.it",
+    phone: "+39 3343357532",
     iban: "IT60X0542811101000000123456",
   },
   firebaseConfig: {
