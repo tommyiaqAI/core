@@ -33,13 +33,13 @@ jobs:
         run: |
           git clone git@github.com:tommyiaqai/${{ matrix.site.name }}.git site-target
 
-      - name: Copy index and shared assets to ${{ matrix.site.name }}
+      - name: Copy all core files and folders to ${{ matrix.site.name }}
         run: |
-          rsync -av index.html style.css checkout.html conferma.html css/ fonts/ img/ js/ site-target/ \
+          rsync -av --delete ./ site-target/ \
             --exclude=site-config.js \
             --exclude='.git/' \
             --exclude='.github/'
-                  
+
       - name: Commit and push to ${{ matrix.site.name }}
         run: |
           cd site-target
