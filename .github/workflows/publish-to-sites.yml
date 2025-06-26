@@ -37,12 +37,12 @@ jobs:
         run: |
           rsync -av --delete ./ site-target/ \
             --exclude=site-config.js \
+            --exclude=custom.html \
             --exclude='.git/' \
             --exclude='.github/' \
             --exclude=site-target/ \
-            --exclude=README.md \
-            --exclude=custom.html \            
             --exclude=img/
+
 
 
       - name: Commit and push to ${{ matrix.site.name }}
