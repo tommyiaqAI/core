@@ -37,6 +37,7 @@ jobs:
         run: |
           rsync -av --delete ./ site-target/ \
             --exclude=site-config.js \
+            --exclude=CNAME \
             --exclude=custom.html \
             --exclude='.git/' \
             --exclude='.github/' \
