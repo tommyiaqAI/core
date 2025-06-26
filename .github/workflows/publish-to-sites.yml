@@ -41,6 +41,8 @@ jobs:
             --exclude='.github/' \
             --exclude=site-target/ \
             --exclude=img/
+            --exclude=README.md \
+            --exclude=custom.html \
 
       - name: Commit and push to ${{ matrix.site.name }}
         run: |
